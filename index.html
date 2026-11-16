@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kirubahar S – Performance Marketer | 3D Cosy Portfolio</title>
+<meta name="description" content="Explore Kirubahar's cosy room to unlock his Meta Ads case study: 5,905 reach, 4 UGC creatives tested, winning ad at 1.28% CTR.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#1c2a24; --paper:#fbfaf4; --jungle:#10261f; --jungle2:#1d3d31; --mango:#ffb000; --tomato:#e8483b; --blue:#2d6cdf; --leaf:#3a9d5d; --sky:#8ecae6; --sage:#dbe3cb; --muted:#55645c; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html,body { min-height:100%; }
+  body { font-family:"Nunito",system-ui,Arial,sans-serif; color:var(--ink); background:radial-gradient(ellipse 80% 70% at 50% 45%, var(--jungle2) 0%, var(--jungle) 75%); overflow-x:hidden; }
+  body::before { content:""; position:fixed; inset:0; background-image:radial-gradient(#ffffff10 1px, transparent 1.5px); background-size:22px 22px; pointer-events:none; }
+  h1,h2,h3,h4,.btn,.toast,.big,.qhead { font-family:"Baloo 2","Nunito",sans-serif; }
+  a { color:inherit; }
+
+  .stage { min-height:100vh; display:flex; align-items:center; justify-content:center; perspective:1400px; padding:90px 16px 40px; }
+  .room { width:min(880px, 96vw, calc((100vh - 150px) * 0.97)); transform-style:preserve-3d; transition:transform .45s cubic-bezier(.2,.9,.3,1); filter:drop-shadow(0 34px 38px rgba(0,0,0,.5)); }
+  .room svg { width:100%; height:auto; display:block; overflow:visible; }
+  body.panel-open .room { --shift:-190px; }
+
+  .hot { cursor:pointer; outline:none; transition:transform .2s ease, filter .2s ease; }
+  .hot:hover, .hot:focus-visible { transform:translateY(-6px); filter:drop-shadow(0 0 8px #ffd56a) drop-shadow(0 0 2px #fff); }
+  .marker { pointer-events:none; animation:bob 1.3s ease-in-out infinite; }
+  .marker .ring { transform-box:fill-box; transform-origin:center; animation:ring 1.6s ease-out infinite; }
+  .marker.gone { display:none; }
+  .check { display:none; pointer-events:none; }
+  .check.show { display:inline; animation:popin .5s cubic-bezier(.3,1.8,.5,1); transform-box:fill-box; transform-origin:center; }
+  @keyframes bob { 50% { transform:translateY(-7px); } }
+  @keyframes ring { 0% { transform:scale(1); opacity:.9; } 100% { transform:scale(2.3); opacity:0; } }
+  @keyframes popin { from { transform:scale(0); } }
+  .twinkle, .fairy { animation:tw 2.2s ease-in-out infinite; }
+  @keyframes tw { 50% { opacity:.3; } }
+  .steam { animation:steam 2.4s ease-in-out infinite; opacity:0; }
+  @keyframes steam { 0% { opacity:0; transform:translateY(6px);} 40% { opacity:.9;} 100% { opacity:0; transform:translateY(-12px);} }
+  .lampglow { animation:glow 4s ease-in-out infinite; }
+  @keyframes glow { 50% { opacity:.6; } }
+  .zzz { animation:zz 2.6s ease-in-out infinite; }
+  @keyframes zz { 0% { opacity:0; transform:translate(0,4px);} 50% { opacity:1;} 100% { opacity:0; transform:translate(8px,-12px);} }
+  .bubble { animation:bubble 5s ease-in-out infinite; }
+  @keyframes bubble { 0%,60%,100% { opacity:0; } 10%,50% { opacity:1; } }
+  .sparkle { animation:tw 1.4s ease-in-out infinite; }
+
+  .hud { position:fixed; top:14px; left:14px; right:14px; display:flex; justify-content:space-between; align-items:flex-start; gap:12px; z-index:20; pointer-events:none; }
+  .hud > * { pointer-events:auto; }
+  .player { background:var(--paper); border:3px solid var(--ink); border-radius:18px; padding:9px 14px 9px 9px; display:flex; gap:12px; align-items:center; box-shadow:4px 4px 0 var(--ink); }
+  .avatar { width:52px; height:52px; border-radius:14px; border:3px solid var(--ink); object-fit:cover; background:var(--mango); flex:none; }
+  .player h1 { font-size:19px; line-height:1; }
+  .lvl { font-size:13px; font-weight:700; color:var(--muted); margin-top:2px; }
+  .xpwrap { display:flex; align-items:center; gap:8px; margin-top:5px; }
+  .xpbar { width:170px; height:13px; border:2.5px solid var(--ink); border-radius:10px; background:#fff; overflow:hidden; }
+  .xpbar i { display:block; height:100%; width:0; background:repeating-linear-gradient(-45deg, var(--mango) 0 8px, #ffc533 8px 16px); transition:width .7s cubic-bezier(.3,1.5,.5,1); }
+  .xptext { font-size:12px; font-weight:800; white-space:nowrap; }
+  .topbtns { display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+  .btn { display:inline-flex; align-items:center; gap:6px; font-weight:700; font-size:16px; line-height:1; padding:11px 16px 9px; border-radius:14px; border:3px solid var(--ink); background:var(--paper); color:var(--ink); text-decoration:none; box-shadow:3px 3px 0 var(--ink); cursor:pointer; transition:transform .12s, box-shadow .12s; }
+  .btn:hover { transform:translate(-2px,-2px); box-shadow:5px 5px 0 var(--ink); }
+  .btn:active { transform:translate(2px,2px); box-shadow:1px 1px 0 var(--ink); }
+  .btn.blue { background:var(--blue); color:#fff; }
+  .btn.mango { background:var(--mango); }
+  .btn.green { background:var(--leaf); color:#fff; }
+  .btn.small { font-size:14px; padding:8px 12px 6px; }
+
+  .quests { position:fixed; left:14px; bottom:14px; background:var(--paper); border:3px solid var(--ink); border-radius:18px; box-shadow:4px 4px 0 var(--ink); z-index:20; width:250px; overflow:hidden; }
+  .qhead { display:flex; justify-content:space-between; align-items:center; width:100%; background:none; border:0; padding:10px 14px 8px; font-size:17px; font-weight:700; cursor:pointer; color:var(--ink); }
+  .qhead .count { background:var(--ink); color:var(--paper); border-radius:20px; font-size:13px; padding:2px 9px; }
+  .qbody { padding:0 14px 12px; }
+  .quests.collapsed .qbody { display:none; }
+  .quests li { list-style:none; font-size:14.5px; font-weight:700; display:flex; gap:9px; align-items:center; padding:4px 0; cursor:pointer; }
+  .quests li:hover { color:var(--blue); }
+  .quests li.bonus { color:#a06d00; }
+  .quests li::before { content:""; width:16px; height:16px; border:2.5px solid var(--ink); border-radius:5px; background:#fff; flex:none; }
+  .quests li.done { color:var(--muted); text-decoration:line-through; }
+  .quests li.done::before { background:var(--leaf) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") center/100% no-repeat; }
+  .skip { display:block; margin-top:8px; font-size:13.5px; font-weight:800; color:var(--tomato); text-decoration:none; }
+  .skip:hover { text-decoration:underline; }
+
+  .panel { position:fixed; top:50%; right:22px; transform:translate(130%,-50%); width:min(400px, 92vw); max-height:84vh; display:flex; flex-direction:column; background:var(--paper); border:3px solid var(--ink); border-radius:22px; box-shadow:7px 7px 0 var(--ink); z-index:30; transition:transform .4s cubic-bezier(.3,1.25,.5,1); }
+  .panel.open { transform:translate(0,-50%); }
+  .pscroll { overflow:auto; padding:22px 22px 12px; }
+  .pfoot { border-top:2.5px dashed #c9d0c2; padding:12px 16px; display:flex; justify-content:space-between; align-items:center; gap:10px; }
+  .pfoot .prog { font-size:13px; font-weight:800; color:var(--muted); }
+  .panel .close { position:absolute; top:12px; right:12px; width:38px; height:38px; border-radius:12px; border:3px solid var(--ink); background:#fff; color:var(--ink); cursor:pointer; z-index:2; display:flex; align-items:center; justify-content:center; padding:0; -webkit-appearance:none; appearance:none; box-shadow:2px 2px 0 var(--ink); }
+  .panel .close svg { display:block; }
+  .panel .close:hover { background:var(--tomato); color:#fff; }
+  .chipxp { display:inline-block; background:var(--mango); border:2.5px solid var(--ink); border-radius:20px; font-family:"Baloo 2",sans-serif; font-weight:800; font-size:13px; padding:2px 10px 0; margin-bottom:8px; }
+  .panel h2 { font-size:25px; line-height:1.15; margin-bottom:10px; padding-right:40px; }
+  .panel h3 { font-size:17px; margin:14px 0 8px; }
+  .panel p { font-size:15px; line-height:1.6; margin-bottom:12px; }
+  .grid4 { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:12px 0; }
+  .tile { border:2.5px solid var(--ink); border-radius:14px; padding:10px 12px; background:#fff; }
+  .tile b { font-family:"Baloo 2",sans-serif; font-size:26px; display:block; line-height:1.05; }
+  .tile span { font-size:13px; font-weight:700; }
+  .tile.m { background:var(--mango);} .tile.g { background:#bfe5c9;} .tile.s { background:var(--sky);}
+  .steps { counter-reset:s; margin:10px 0; }
+  .steps li { list-style:none; counter-increment:s; position:relative; padding-left:38px; margin-bottom:10px; font-size:14.5px; line-height:1.5; }
+  .steps li::before { content:counter(s); position:absolute; left:0; top:0; width:27px; height:27px; border-radius:9px; background:var(--blue); color:#fff; border:2.5px solid var(--ink); font-family:"Baloo 2",sans-serif; font-weight:800; font-size:14px; display:flex; align-items:center; justify-content:center; }
+  .frow { display:grid; grid-template-columns:112px 1fr 30px; gap:8px; align-items:center; font-size:13.5px; font-weight:700; margin-bottom:7px; }
+  .fbar { height:18px; border:2.5px solid var(--ink); border-radius:7px; background:#fff; overflow:hidden; }
+  .fbar i { display:block; height:100%; background:var(--blue); min-width:5px; }
+  .callout { background:#fff3cf; border:2.5px solid var(--ink); border-left-width:8px; border-left-color:var(--mango); border-radius:12px; padding:10px 12px; font-size:14px; line-height:1.5; margin-top:10px; }
+  .ads { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:12px 0; }
+  .ad { border:2.5px solid var(--ink); border-radius:14px; padding:8px; background:#fff; position:relative; }
+  .ad.win { background:#bfe5c9; }
+  .ad .ph { aspect-ratio:4/5; border:2px solid var(--ink); border-radius:10px; background:repeating-linear-gradient(45deg,#e6ead9 0 8px,#f2f4ea 8px 16px); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:#7d8a74; text-align:center; margin-bottom:7px; }
+  .ad h4 { font-size:14px; line-height:1.2; margin-bottom:4px; }
+  .ad .kv { font-size:12.5px; font-weight:700; display:flex; justify-content:space-between; }
+  .ad .crown { position:absolute; top:-12px; right:-8px; background:var(--mango); border:2.5px solid var(--ink); border-radius:10px; font-family:"Baloo 2",sans-serif; font-size:12px; font-weight:800; padding:1px 8px 0; }
+  .ad video.vid { width:100%; aspect-ratio:9/16; object-fit:cover; border:2px solid var(--ink); border-radius:10px; background:#000; display:block; margin-bottom:7px; }
+  .ad .hook { font-size:12px !important; line-height:1.35 !important; color:var(--muted); font-weight:700; margin-bottom:5px !important; font-style:italic; }
+  .gal { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:12px 0; }
+  .gimg { border:2.5px solid var(--ink); border-radius:12px; background:#fff; padding:6px; cursor:zoom-in; text-align:left; font:inherit; color:var(--ink); }
+  .gimg img { width:100%; aspect-ratio:4/5; object-fit:cover; object-position:top; border-radius:8px; display:block; margin-bottom:5px; }
+  .gimg span { font-size:12.5px; font-weight:800; }
+  .gimg:hover { box-shadow:3px 3px 0 var(--ink); transform:translate(-1px,-1px); }
+  .lightbox { position:fixed; inset:0; background:rgba(8,20,16,.86); display:none; align-items:center; justify-content:center; z-index:70; padding:24px; cursor:zoom-out; }
+  .lightbox.show { display:flex; }
+  .lightbox img { max-width:100%; max-height:100%; border:3px solid var(--ink); border-radius:14px; box-shadow:8px 8px 0 var(--mango); }
+  .chips { display:flex; flex-wrap:wrap; gap:7px; margin:10px 0 14px; }
+  .chip { border:2.5px solid var(--ink); border-radius:20px; padding:3px 11px; font-size:13px; font-weight:800; background:#fff; }
+  .chip:nth-child(4n+1){background:var(--mango);} .chip:nth-child(4n+2){background:var(--sky);} .chip:nth-child(4n+3){background:#bfe5c9;}
+  .xp { border:2.5px solid var(--ink); border-radius:12px; padding:8px 12px; margin-bottom:8px; background:#fff; display:flex; justify-content:space-between; gap:10px; align-items:baseline; }
+  .xp b { font-family:"Baloo 2",sans-serif; font-size:15.5px; }
+  .xp span { color:var(--muted); font-size:12.5px; font-weight:700; text-align:right; }
+  .row-btns { display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+  .contactline { font-weight:800; font-size:15px; }
+
+  .toast { position:fixed; top:96px; left:50%; transform:translate(-50%,-30px); opacity:0; pointer-events:none; background:var(--ink); color:var(--paper); border-radius:16px; padding:9px 18px 9px 10px; font-size:16px; font-weight:700; z-index:40; transition:transform .35s cubic-bezier(.3,1.5,.5,1), opacity .25s; display:flex; gap:10px; align-items:center; box-shadow:0 10px 24px rgba(0,0,0,.35); }
+  .toast.show { transform:translate(-50%,0); opacity:1; }
+  .toast .medal { width:30px; height:30px; border-radius:50%; background:var(--mango); color:var(--ink); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:16px; }
+
+  .overlay { position:fixed; inset:0; background:rgba(8,20,16,.68); display:none; align-items:center; justify-content:center; z-index:50; padding:20px; }
+  .overlay.show { display:flex; }
+  .card { background:var(--paper); border:3px solid var(--ink); border-radius:26px; box-shadow:9px 9px 0 var(--ink); padding:28px; max-width:470px; width:100%; animation:pop .5s cubic-bezier(.3,1.6,.5,1); position:relative; }
+  @keyframes pop { from { transform:scale(.7) rotate(-2deg); opacity:0; } }
+  .welcome .who { display:flex; gap:16px; align-items:center; margin-bottom:14px; }
+  .welcome img { width:84px; height:84px; border-radius:20px; border:3px solid var(--ink); object-fit:cover; transform:rotate(-3deg); box-shadow:4px 4px 0 var(--ink); }
+  .welcome h2 { font-size:28px; line-height:1.05; }
+  .welcome .role { font-weight:800; color:var(--blue); font-size:15px; margin-top:4px; }
+  .welcome p { font-size:15.5px; line-height:1.55; margin-bottom:14px; }
+  .pills { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+  .pill { border:2.5px solid var(--ink); border-radius:12px; padding:5px 10px 4px; font-size:13.5px; font-weight:800; background:#fff; }
+  .pill b { font-family:"Baloo 2",sans-serif; font-size:17px; margin-right:3px; }
+  .pill:nth-child(1){background:var(--mango);} .pill:nth-child(2){background:#bfe5c9;} .pill:nth-child(3){background:var(--sky);}
+  .tiny { font-size:13px; font-weight:700; color:var(--muted); margin-top:12px; }
+  .lu { text-align:center; }
+  .lu .big { font-size:46px; font-weight:800; color:var(--tomato); line-height:1; -webkit-text-stroke:1.5px var(--ink); }
+  .lu h2 { font-size:25px; margin:8px 0; }
+  .lu p { font-size:15px; margin-bottom:16px; }
+  .lu .row-btns { justify-content:center; }
+  .confetti { position:fixed; top:-14px; width:10px; height:14px; z-index:60; border:1.5px solid var(--ink); animation:fall linear forwards; }
+  @keyframes fall { to { transform:translateY(110vh) rotate(720deg); } }
+
+  @media (max-width:1180px) { body.panel-open .room { --shift:-120px; } }
+  @media (max-width:760px) {
+    .hide-sm { display:none; }
+    .player { padding:6px 10px 6px 6px; gap:9px; } .avatar { width:42px; height:42px; border-radius:11px; }
+    .player h1 { font-size:16px; } .lvl { font-size:11.5px; } .xpbar { width:96px; }
+    .topbtns .btn { font-size:13.5px; padding:8px 10px 6px; }
+    .stage { padding:100px 0 96px; }
+    .room { width:118vw; margin:0 -9vw; max-width:none; }
+    body.panel-open .room { --shift:0px; }
+    .quests { width:auto; right:14px; }
+    .quests .qbody ul { display:grid; grid-template-columns:1fr 1fr; }
+    .panel { right:0; left:0; top:auto; bottom:0; width:100%; max-height:76vh; transform:translateY(110%); border-radius:22px 22px 0 0; border-bottom:0; }
+    .panel.open { transform:translateY(0); }
+    .card { padding:22px; }
+    .welcome h2 { font-size:24px; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before { animation:none !important; transition:none !important; } }
+
+  .three { position:fixed; inset:0; z-index:1; }
+  .three canvas { display:block; cursor:grab; touch-action:none; }
+  .three canvas:active { cursor:grabbing; }
+  .hud, .quests { z-index:20; }
+  .hint3d { position:fixed; left:50%; bottom:18px; transform:translateX(-50%); z-index:15; color:#fbfaf4; font-size:14.5px; font-weight:700; background:rgba(16,38,31,.72); border:2px solid #fbfaf440; padding:7px 14px; border-radius:20px; pointer-events:none; transition:opacity .6s; white-space:nowrap; }
+  .hint3d.hide { opacity:0; }
+  @media (max-width:760px) { .hint3d { bottom:76px; font-size:13px; } }
+</style>
+</head>
+<body>
+
+<div class="hud">
+  <div class="player">
+    <img class="avatar" src="avatar.jpg" alt="Kirubahar S">
+    <div>
+      <h1>Kirubahar S</h1>
+      <div class="lvl" id="lvl">Lv. 1 · Junior Performance Marketer</div>
+      <div class="xpwrap"><div class="xpbar"><i id="xpfill"></i></div><span class="xptext" id="xptext">0/100 XP</span></div>
+    </div>
+  </div>
+  <div class="topbtns">
+    <a class="btn mango" href="quick.html"><span class="hide-sm">Recruiter? </span>Quick view</a>
+    <a class="btn hide-sm" href="room.html" title="Lighter 2D version">2D room</a>
+    <a class="btn blue" href="Kirubahar_S_Resume.pdf">Resume</a>
+  </div>
+</div>
+
+<div id="three" class="three" aria-label="3D room. Drag to rotate, scroll to zoom, click glowing objects to explore."></div>
+<div id="room" hidden></div>
+<div class="hint3d" id="hint3d">Drag to rotate &middot; scroll to zoom &middot; click anything with a <b>!</b></div>
+
+<nav class="quests" id="quests" aria-label="Quests">
+  <button class="qhead" id="qhead" aria-expanded="true"><span>Quests</span><span class="count" id="qcount">0/5</span></button>
+  <div class="qbody">
+    <ul>
+      <li data-q="case">Open the laptop</li>
+      <li data-q="ads">Check the ad wall</li>
+      <li data-q="stats">Inspect the trophy</li>
+      <li data-q="skills">Browse the bookshelf</li>
+      <li data-q="contact">Knock on the door</li>
+      <li data-q="gallery" class="bonus">Bonus: the pinboard</li>
+    </ul>
+    <a href="#" class="skip" id="skip">Short on time? Skip to contact &rarr;</a>
+  </div>
+</nav>
+
+<aside class="panel" id="panel" aria-live="polite" aria-label="Details">
+  <button class="close" id="close" aria-label="Close"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/></svg></button>
+  <div class="pscroll" id="pbody"></div>
+  <div class="pfoot"><span class="prog" id="pprog"></span><button class="btn green small" id="next">Next</button></div>
+</aside>
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Creative full size"><img id="lbimg" alt=""></div>
+<div class="toast" id="toast"><span class="medal">&#9733;</span><span id="toasttext"></span></div>
+
+<div class="overlay show" id="welcome">
+  <div class="card welcome" role="dialog" aria-labelledby="wtitle">
+    <div class="who">
+      <img src="avatar.jpg" alt="Photo of Kirubahar S">
+      <div><h2 id="wtitle">Hey, I'm Kirubahar</h2><div class="role">Junior Performance Marketer · Meta Ads · Shopify</div></div>
+    </div>
+    <p>I built ExamFlow.in and ran its Meta Ads end to end. This is my room. Explore it to see the campaign, the ads and what I learned.</p>
+    <div class="pills">
+      <span class="pill"><b>5,905</b>reached</span>
+      <span class="pill"><b>1.28%</b>winning CTR</span>
+      <span class="pill"><b>4</b>UGC ads tested</span>
+    </div>
+    <div class="row-btns">
+      <button class="btn blue" id="start">Explore my room &rarr;</button>
+      <a class="btn" href="quick.html">Quick view</a>
+    </div>
+    <p class="tiny">5 quests · about 2 minutes · click anything that glows</p>
+  </div>
+</div>
+
+<div class="overlay" id="levelup">
+  <div class="card lu" role="dialog" aria-labelledby="lutitle">
+    <div class="big">LEVEL UP!</div>
+    <h2 id="lutitle">Lv. 2 · Hire-ready</h2>
+    <p>You've seen the store, the ads, the funnel and the skills. One quest left, and it's yours: send me a message.</p>
+    <div class="row-btns">
+      <a class="btn blue" href="mailto:kirubahars13@gmail.com">Email me</a>
+      <a class="btn" href="https://www.linkedin.com/in/kirubahar">LinkedIn</a>
+      <button class="btn mango" id="keep">Keep exploring</button>
+    </div>
+    <p class="tiny">kirubahars13@gmail.com · +91 9786193450</p>
+  </div>
+</div>
+
+<template id="t-case">
+  <span class="chipxp">+30 XP</span>
+  <h2>Case study: ExamFlow.in</h2>
+  <p>I built a Shopify store selling a ready-made study system for UPSC aspirants (₹259–₹329), then ran a Meta Ads sales campaign to find which story would make them buy.</p>
+  <ol class="steps">
+    <li><b>Build.</b> Store, landing pages, copy, product and pricing, all done myself.</li>
+    <li><b>Test.</b> 4 creator-led UGC ads, each a different angle, in one sales campaign.</li>
+    <li><b>Learn.</b> The "night routine" angle won with 1.28% CTR, over 2× the rest, and drove the first sale.</li>
+    <li><b>Next.</b> Visitors reached the page but few added to cart, so the offer and product page are the next test.</li>
+  </ol>
+  <h3>Where people dropped off</h3>
+  <div class="frow"><span>Link clicks</span><div class="fbar"><i style="width:100%"></i></div><span>48</span></div>
+  <div class="frow"><span>Landing page</span><div class="fbar"><i style="width:79%"></i></div><span>38</span></div>
+  <div class="frow"><span>Add to cart</span><div class="fbar"><i style="width:6.3%;background:#3a9d5d"></i></div><span>3</span></div>
+  <div class="frow"><span>Purchase</span><div class="fbar"><i style="width:2.1%;background:#e8483b"></i></div><span>1</span></div>
+  <div class="callout"><b>Insight:</b> 79% of clicks reached the page, so the ads did their job. Only 8% added to cart, so the product page is the bottleneck.</div>
+  <div class="row-btns"><a class="btn small" href="https://examflow.in/" target="_blank" rel="noopener">Visit ExamFlow.in &nearr;</a></div>
+</template>
+
+<template id="t-ads">
+  <span class="chipxp">+25 XP</span>
+  <h2>The ad wall: 4 angles, 1 winner</h2>
+  <p>Same audience, same budget. Press play to watch each UGC ad. Meta's algorithm agreed with the data and gave the winner about 63% of the spend.</p>
+  <div class="ads">
+    <div class="ad win"><span class="crown">Winner</span><video class="vid" src="media/komal.mp4" poster="media/komal.jpg" controls playsinline preload="none"></video><h4>Komal – Night routine</h4><p class="hook">&ldquo;UPSC prep is a lot&rdquo;</p><div class="kv"><span>CTR</span><span>1.28%</span></div><div class="kv"><span>CPC</span><span>₹23.63</span></div></div>
+    <div class="ad"><video class="vid" src="media/siddita.mp4" poster="media/siddita.jpg" controls playsinline preload="none"></video><h4>Siddita – Invisible struggle</h4><p class="hook">&ldquo;Toughest exam in India&rdquo;</p><div class="kv"><span>CTR</span><span>0.55%</span></div><div class="kv"><span>CPC</span><span>₹24.67</span></div></div>
+    <div class="ad"><video class="vid" src="media/khushi.mp4" poster="media/khushi.jpg" controls playsinline preload="none"></video><h4>Khushi – No more timetables</h4><p class="hook">&ldquo;How many timetables did you follow?&rdquo;</p><div class="kv"><span>CTR</span><span>0.43%</span></div><div class="kv"><span>CPC</span><span>₹29.51</span></div></div>
+    <div class="ad"><video class="vid" src="media/ritika.mp4" poster="media/ritika.jpg" controls playsinline preload="none"></video><h4>Ritika – Karol Bagh</h4><p class="hook">&ldquo;One subject you’ve been avoiding&rdquo;</p><div class="kv"><span>CTR</span><span>0.06%</span></div><div class="kv"><span>CPC</span><span>₹173.63</span></div></div>
+  </div>
+  <div class="callout"><b>Lesson:</b> a relatable daily-routine story beat a location-based angle by a wide margin. Knowing which ad to switch off matters as much as finding the winner.</div>
+  <div class="row-btns"><button class="btn small mango" data-goto="gallery">See my creative practice &rarr;</button></div>
+</template>
+
+<template id="t-gallery">
+  <span class="chipxp">Bonus +10 XP</span>
+  <h2>Pinboard: creative practice</h2>
+  <p>Demo ad creatives I designed for local service businesses: skin and dental clinics and a skill-training centre. Tap any design to see it full size.</p>
+  <div class="gal">
+    <button class="gimg" data-full="media/demo-skin-2.jpg"><img src="media/demo-skin-2.jpg" alt="Skin clinic before and after feed ad" loading="lazy"><span>Skin clinic · feed ad</span></button>
+    <button class="gimg" data-full="media/demo-skin-1.jpg"><img src="media/demo-skin-1.jpg" alt="Skin clinic before and after story ad" loading="lazy"><span>Skin clinic · story ad</span></button>
+    <button class="gimg" data-full="media/demo-dental.jpg"><img src="media/demo-dental.jpg" alt="Dental clinic story ad" loading="lazy"><span>Dental clinic · story ad</span></button>
+    <button class="gimg" data-full="media/demo-cosmetology.jpg"><img src="media/demo-cosmetology.jpg" alt="Cosmetology training course ad" loading="lazy"><span>Training centre · course ad</span></button>
+    <button class="gimg" data-full="media/demo-ayurveda.jpg"><img src="media/demo-ayurveda.jpg" alt="Ayurveda therapy course ad" loading="lazy"><span>Training centre · offer ad</span></button>
+  </div>
+  <div class="callout"><b>What I practise:</b> before/after proof, a clear offer, one strong call to action, and both story (9:16) and feed (1:1) formats.</div>
+</template>
+
+<template id="t-stats">
+  <span class="chipxp">+15 XP</span>
+  <h2>Trophy: campaign results</h2>
+  <div class="grid4">
+    <div class="tile m"><b>5,905</b><span>People reached</span></div>
+    <div class="tile g"><b>1.28%</b><span>Winning ad CTR</span></div>
+    <div class="tile s"><b>₹27.42</b><span>Average CPC</span></div>
+    <div class="tile"><b>₹1,316</b><span>Total spend</span></div>
+  </div>
+  <p>6,818 impressions, 48 link clicks, 38 landing page views, 3 add-to-carts and the store's first purchase. Not profitable yet at this small budget, but it showed exactly what to fix next.</p>
+</template>
+
+<template id="t-skills">
+  <span class="chipxp">+20 XP</span>
+  <h2>Bookshelf: skills and story</h2>
+  <p>Ads, design and e-commerce in one person. I can run the ad, read the funnel and redesign the landing page myself.</p>
+  <div class="chips">
+    <span class="chip">Meta Ads Manager</span><span class="chip">Shopify</span><span class="chip">UGC creative testing</span><span class="chip">A/B testing</span><span class="chip">Funnel analysis</span><span class="chip">CTR · CPC · ROAS</span><span class="chip">Figma</span><span class="chip">Canva</span><span class="chip">Google Sheets</span><span class="chip">AI tools (Claude)</span>
+  </div>
+  <div class="xp"><b>Founder &amp; Performance Marketer</b><span>ExamFlow.in · 2026</span></div>
+  <div class="xp"><b>UI/UX Designer</b><span>Tregzo · May 2025 – Jun 2026</span></div>
+  <div class="xp"><b>E-commerce Operations</b><span>Bazzoit · Nov 2023 – Dec 2024</span></div>
+  <div class="xp"><b>M.E. Aeronautical</b><span>Noorul Islam University · 2022</span></div>
+  <div class="xp"><b>B.Tech Aerospace</b><span>Karunya University · 2019</span></div>
+</template>
+
+<template id="t-contact">
+  <span class="chipxp">+10 XP</span>
+  <h2>Knock knock: let's talk</h2>
+  <p>I'm looking for a junior Meta Ads or performance marketing role, remote across India or in Bangalore. I can join immediately.</p>
+  <p class="contactline">kirubahars13@gmail.com<br>+91 9786193450</p>
+  <div class="row-btns">
+    <a class="btn blue" href="mailto:kirubahars13@gmail.com">Email me</a>
+    <a class="btn" href="https://www.linkedin.com/in/kirubahar">LinkedIn</a>
+    <a class="btn mango" href="Kirubahar_S_Resume.pdf">Resume PDF</a>
+  </div>
+</template>
+
+<template id="t-me">
+  <span class="chipxp">Hello!</span>
+  <h2>That's me at my desk</h2>
+  <p>Kirubahar, from Nagercoil, Tamil Nadu. Aerospace engineer turned designer turned performance marketer. I like finding out why one ad works and another doesn't, then fixing what happens after the click.</p>
+  <p>Open to remote roles across India or relocating to Bangalore.</p>
+</template>
+
+<template id="t-cat">
+  <span class="chipxp">Secret +5 XP</span>
+  <h2>You found Kaapi, the office cat</h2>
+  <p>Kaapi approves of A/B testing, mostly because it means more time sleeping on the beanbag. Achievement unlocked: <b>Curious explorer</b>.</p>
+</template>
+
+<script>
+  const XP = { case:30, ads:25, stats:15, skills:20, contact:10, cat:5, me:0, gallery:10 };
+  const LABEL = { case:"Open the laptop", ads:"Check the ad wall", stats:"Inspect the trophy", skills:"Browse the bookshelf", contact:"Knock on the door" };
+  const NAMES = { case:"Case study unlocked", ads:"Ad wall unlocked", stats:"Results unlocked", skills:"Skills unlocked", contact:"Contact unlocked", cat:"Secret: Curious explorer", gallery:"Bonus: creative pinboard" };
+  const MAIN = ["case","ads","stats","skills","contact"];
+  const seen = new Set();
+  let xp = 0, leveled = false, current = null;
+  const $ = s => document.querySelector(s);
+  const panel = $("#panel"), pbody = $("#pbody"), room = $("#room");
+  let tilt = "";
+
+  function applyRoom() { room.style.transform = "translateX(var(--shift, 0px)) " + tilt; }
+  function mainDone() { return MAIN.filter(m => seen.has(m)).length; }
+
+  function award(q) {
+    if (seen.has(q)) return;
+    seen.add(q);
+    if (!XP[q]) return;
+    xp += XP[q];
+    const shown = Math.min(xp, 100);
+    $("#xpfill").style.width = shown + "%";
+    $("#xptext").textContent = shown + "/100 XP" + (xp > 100 ? " +" + (xp - 100) : "");
+    document.querySelectorAll('.marker[data-m="' + q + '"]').forEach(m => m.classList.add("gone"));
+    document.querySelectorAll('.check[data-c="' + q + '"]').forEach(c => c.classList.add("show"));
+    document.querySelectorAll('.quests li[data-q="' + q + '"]').forEach(li => li.classList.add("done"));
+    $("#qcount").textContent = mainDone() + "/5";
+    toast(NAMES[q] + " · +" + XP[q] + " XP");
+  }
+  function updateFoot() {
+    const left = MAIN.filter(m => !seen.has(m));
+    $("#pprog").textContent = mainDone() + " of 5 quests done";
+    const nx = $("#next");
+    if (left.length) { nx.textContent = "Next: " + LABEL[left[0]] + " →"; nx.dataset.go = left[0]; }
+    else { nx.textContent = "Claim your reward →"; nx.dataset.go = "reward"; }
+  }
+  function open(q) {
+    const t = document.getElementById("t-" + q);
+    if (!t) return;
+    current = q;
+    pbody.querySelectorAll("video").forEach(v => v.pause());
+    pbody.innerHTML = "";
+    pbody.appendChild(t.content.cloneNode(true));
+    pbody.scrollTop = 0;
+    award(q);
+    updateFoot();
+    if (window.__focus) window.__focus(q);
+    panel.classList.add("open");
+    document.body.classList.add("panel-open");
+    applyRoom();
+  }
+  function closePanel() { const was = panel.classList.contains("open"); panel.classList.remove("open"); document.body.classList.remove("panel-open"); applyRoom(); if (was && window.__unfocus) window.__unfocus(); }
+  let tt;
+  function toast(msg) {
+    $("#toasttext").textContent = msg;
+    $("#toast").classList.add("show");
+    clearTimeout(tt);
+    tt = setTimeout(() => $("#toast").classList.remove("show"), 2200);
+  }
+  function levelUp() {
+    leveled = true;
+    $("#lvl").textContent = "Lv. 2 · Hire-ready";
+    closePanel();
+    $("#levelup").classList.add("show");
+    const cols = ["#ffb000","#e8483b","#3a9d5d","#2d6cdf","#8ecae6"];
+    for (let i = 0; i < 80; i++) {
+      const c = document.createElement("div");
+      c.className = "confetti";
+      c.style.left = Math.random() * 100 + "vw";
+      c.style.background = cols[i % cols.length];
+      c.style.animationDuration = (1.8 + Math.random() * 1.8) + "s";
+      c.style.animationDelay = Math.random() * 0.5 + "s";
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 4500);
+    }
+  }
+
+  document.querySelectorAll(".hot").forEach(h => {
+    h.addEventListener("click", () => open(h.dataset.q));
+    h.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(h.dataset.q); } });
+  });
+  document.querySelectorAll(".quests li").forEach(li => li.addEventListener("click", () => open(li.dataset.q)));
+  $("#next").addEventListener("click", e => { const g = e.currentTarget.dataset.go; if (g === "reward") levelUp(); else open(g); });
+  $("#close").addEventListener("click", () => { pbody.querySelectorAll("video").forEach(v => v.pause()); closePanel(); });
+  pbody.addEventListener("click", e => {
+    const g = e.target.closest("[data-goto]"); if (g) { open(g.dataset.goto); return; }
+    const im = e.target.closest(".gimg"); if (im) { $("#lbimg").src = im.dataset.full; $("#lightbox").classList.add("show"); }
+  });
+  pbody.addEventListener("play", e => { pbody.querySelectorAll("video").forEach(v => { if (v !== e.target) v.pause(); }); }, true);
+  $("#lightbox").addEventListener("click", () => $("#lightbox").classList.remove("show"));
+  $("#start").addEventListener("click", () => { $("#welcome").classList.remove("show"); toast("Quest started · click anything that glows"); });
+  $("#keep").addEventListener("click", () => $("#levelup").classList.remove("show"));
+  $("#skip").addEventListener("click", e => { e.preventDefault(); open("contact"); });
+  $("#qhead").addEventListener("click", () => {
+    const q = $("#quests"); q.classList.toggle("collapsed");
+    $("#qhead").setAttribute("aria-expanded", !q.classList.contains("collapsed"));
+  });
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") { $("#lightbox").classList.remove("show"); pbody.querySelectorAll("video").forEach(v => v.pause()); closePanel(); $("#levelup").classList.remove("show"); $("#welcome").classList.remove("show"); }
+  });
+  if (matchMedia("(max-width:760px)").matches) $("#quests").classList.add("collapsed");
+
+  if (matchMedia("(pointer:fine)").matches && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    window.addEventListener("mousemove", e => {
+      const x = (e.clientX / innerWidth - .5), y = (e.clientY / innerHeight - .5);
+      tilt = "rotateX(" + (-y * 6).toFixed(2) + "deg) rotateY(" + (x * 8).toFixed(2) + "deg)";
+      applyRoom();
+    });
+  }
+  window.__seen = () => seen;
+  window.open3D = open;
+  let hintT = setTimeout(() => {}, 0);
+  document.getElementById('three').addEventListener('pointerdown', () => { clearTimeout(hintT); hintT = setTimeout(() => document.getElementById('hint3d').classList.add('hide'), 2500); }, { once: true });
+</script>
+<script>
+  (function(){ try { const c = document.createElement('canvas'); if (!(c.getContext('webgl2') || c.getContext('webgl'))) throw 0; } catch (e) { location.replace('room.html'); } })();
+</script>
+<script>window.AD_IMAGES=['media/komal.jpg','media/siddita.jpg','media/khushi.jpg','media/ritika.jpg'];window.DEMO_IMAGES=['media/demo-skin-2.jpg','media/demo-dental.jpg','media/demo-cosmetology.jpg','media/demo-ayurveda.jpg'];</script>
+<script src="scene.bundle.js" defer></script>
+</body>
+</html>
