@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root { --ink:#1c2a24; --paper:#fbfaf4; --sand:#f3efe2; --jungle:#10261f; --jungle2:#1d3d31; --mango:#ffb000; --tomato:#e8483b; --blue:#2d6cdf; --leaf:#3a9d5d; --mint:#bfe5c9; --sky:#8ecae6; --muted:#55645c; }
+  :root { --ink:#14223a; --paper:#fbfaf4; --sand:#f3efe2; --jungle:#0d1b38; --jungle2:#2f5486; --dusk:#f3b48c; --mango:#f0ac3a; --tomato:#d25b3f; --blue:#2f5486; --leaf:#3a9d5d; --mint:#cfe0f3; --sky:#8ecae6; --muted:#56637a; }
   * { box-sizing:border-box; margin:0; padding:0; }
   html { scroll-behavior:smooth; }
   body { font-family:"Nunito",system-ui,Arial,sans-serif; color:var(--ink); background:var(--paper); line-height:1.6; }
@@ -16,12 +16,12 @@
   a { color:inherit; }
   .wrap { max-width:1080px; margin:0 auto; padding:0 24px; }
 
-  nav { position:sticky; top:0; z-index:20; background:rgba(16,38,31,.94); backdrop-filter:blur(8px); border-bottom:3px solid var(--ink); }
+  nav { position:sticky; top:0; z-index:20; background:rgba(13,27,56,.94); backdrop-filter:blur(8px); border-bottom:3px solid var(--ink); }
   nav .wrap { display:flex; align-items:center; justify-content:space-between; height:64px; gap:16px; }
   .logo { display:flex; align-items:center; gap:10px; color:var(--paper); text-decoration:none; font-weight:800; font-size:19px; }
   .logo img { width:36px; height:36px; border-radius:10px; border:2px solid var(--mango); object-fit:cover; }
   nav ul { list-style:none; display:flex; gap:22px; font-weight:700; font-size:15px; }
-  nav ul a { color:#cfdcd2; text-decoration:none; }
+  nav ul a { color:#d3deef; text-decoration:none; }
   nav ul a:hover { color:var(--mango); }
   .navbtns { display:flex; gap:10px; }
 
@@ -31,7 +31,7 @@
   .btn.blue { background:var(--blue); color:#fff; }
   .btn.small { font-size:14px; padding:9px 13px 7px; }
 
-  .hero { background:radial-gradient(ellipse 70% 90% at 75% 40%, var(--jungle2), var(--jungle) 75%); color:var(--paper); padding:72px 0 0; border-bottom:3px solid var(--ink); }
+  .hero { position:relative; background:radial-gradient(#ffffff50 1px, transparent 1.6px) 0 0/97px 89px, radial-gradient(#ffffff2a 1px, transparent 1.4px) 21px 37px/53px 61px, linear-gradient(180deg, var(--jungle) 0%, var(--jungle2) 62%, #b7a6b8 88%, var(--dusk) 100%); color:var(--paper); padding:72px 0 0; border-bottom:3px solid var(--ink); }
   .hero-grid { display:grid; grid-template-columns:1.35fr .65fr; gap:40px; align-items:center; }
   .tag { display:inline-flex; align-items:center; gap:8px; background:#ffffff14; border:2px solid #ffffff30; font-size:14px; font-weight:700; padding:6px 14px; border-radius:30px; margin-bottom:22px; }
   .dot { width:9px; height:9px; border-radius:50%; background:#5fe08a; box-shadow:0 0 0 4px #5fe08a33; }
@@ -102,7 +102,7 @@
   .chip.m { background:var(--mango); } .chip.g { background:var(--mint); } .chip.s { background:var(--sky); }
   .note { background:#fff; border:3px solid var(--ink); border-radius:18px; padding:18px 20px; box-shadow:5px 5px 0 var(--ink); font-size:15.5px; }
 
-  .cta { background:radial-gradient(ellipse 80% 120% at 20% 0%, var(--jungle2), var(--jungle) 70%); color:var(--paper); border:3px solid var(--ink); border-radius:28px; padding:56px 40px; text-align:center; box-shadow:9px 9px 0 var(--mango); }
+  .cta { background:radial-gradient(#ffffff45 1px, transparent 1.6px) 0 0/97px 89px, linear-gradient(160deg, var(--jungle) 0%, var(--jungle2) 65%, var(--dusk) 130%); color:var(--paper); border:3px solid var(--ink); border-radius:28px; padding:56px 40px; text-align:center; box-shadow:9px 9px 0 var(--mango); }
   .cta h2 { font-size:46px; }
   .cta p { color:#cfdcd2; font-size:18px; margin:6px auto 26px; max-width:560px; }
   .cta .btns { justify-content:center; }
@@ -132,6 +132,7 @@
   .lightbox.show { display:flex; }
   .lightbox img { max-width:100%; max-height:100%; border:3px solid var(--ink); border-radius:16px; box-shadow:9px 9px 0 var(--mango); }
   @media (max-width:860px) { .gal { grid-template-columns:1fr 1fr; } }
+  .badge.test { background:var(--sky); }
 </style>
 </head>
 <body>
@@ -205,6 +206,7 @@
     <div class="ad win"><span class="badge">Winner</span><video class="thumb" src="media/komal.mp4" poster="media/komal.jpg" controls playsinline preload="none"></video><div class="meta"><h4>Komal – Night routine</h4><p class="hook">&ldquo;UPSC prep is a lot&rdquo;</p><div class="kv"><span>CTR</span><b>1.28%</b></div><div class="kv"><span>CPC</span><b>₹23.63</b></div></div></div>
     <div class="ad"><video class="thumb" src="media/siddita.mp4" poster="media/siddita.jpg" controls playsinline preload="none"></video><div class="meta"><h4>Siddita – Invisible struggle</h4><p class="hook">&ldquo;Toughest exam in India&rdquo;</p><div class="kv"><span>CTR</span><b>0.55%</b></div><div class="kv"><span>CPC</span><b>₹24.67</b></div></div></div>
     <div class="ad"><video class="thumb" src="media/khushi.mp4" poster="media/khushi.jpg" controls playsinline preload="none"></video><div class="meta"><h4>Khushi – No more timetables</h4><p class="hook">&ldquo;How many timetables did you follow?&rdquo;</p><div class="kv"><span>CTR</span><b>0.43%</b></div><div class="kv"><span>CPC</span><b>₹29.51</b></div></div></div>
+    <div class="ad"><span class="badge test">Testing now</span><video class="thumb" src="media/ananshia.mp4" poster="media/ananshia.jpg" controls playsinline preload="none"></video><div class="meta"><h4>Ananshia – Sheets Kit demo</h4><p class="hook">&ldquo;Basically, biryani money&rdquo;</p><div class="kv"><span>Angle</span><b>Product demo + price</b></div><div class="kv"><span>Status</span><b>Live test</b></div></div></div>
     <div class="ad"><video class="thumb" src="media/ritika.mp4" poster="media/ritika.jpg" controls playsinline preload="none"></video><div class="meta"><h4>Ritika – Karol Bagh</h4><p class="hook">&ldquo;One subject you’ve been avoiding&rdquo;</p><div class="kv"><span>CTR</span><b>0.06%</b></div><div class="kv"><span>CPC</span><b>₹173.63</b></div></div></div>
   </div>
 </div></section>
@@ -230,7 +232,7 @@
     <div class="chips">
       <span class="chip m">Meta Ads Manager</span><span class="chip g">Shopify</span><span class="chip s">UGC creative testing</span><span class="chip">A/B testing</span><span class="chip m">Funnel analysis</span><span class="chip">CTR · CPC · ROAS</span><span class="chip s">Figma</span><span class="chip g">Canva</span><span class="chip">Google Sheets</span><span class="chip">AI tools (Claude)</span>
     </div>
-    <div class="note">From Nagercoil, Tamil Nadu. Aerospace engineer turned designer turned performance marketer. Speaks English and Tamil.</div>
+    <div class="note">From Kanyakumari, Tamil Nadu. Aerospace engineer turned designer turned performance marketer. Speaks English and Tamil.</div>
   </div>
   <div class="timeline">
     <div class="t"><h4>Founder &amp; Performance Marketer</h4><span>ExamFlow.in · 2026</span></div>
@@ -254,7 +256,7 @@
   </div>
 </div></section>
 
-<footer>© 2026 Kirubahar S · Nagercoil, Tamil Nadu · <a href="index.html">Explore the 3D room</a></footer>
+<footer>© 2026 Kirubahar S · Kanyakumari, Tamil Nadu · <a href="index.html">Explore the 3D room</a></footer>
 <script>
   document.querySelectorAll(".gimg").forEach(b => b.addEventListener("click", () => { document.getElementById("lbimg").src = b.dataset.full; document.getElementById("lightbox").classList.add("show"); }));
   document.getElementById("lightbox").addEventListener("click", e => e.currentTarget.classList.remove("show"));

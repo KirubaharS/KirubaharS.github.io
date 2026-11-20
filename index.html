@@ -8,11 +8,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root { --ink:#1c2a24; --paper:#fbfaf4; --jungle:#10261f; --jungle2:#1d3d31; --mango:#ffb000; --tomato:#e8483b; --blue:#2d6cdf; --leaf:#3a9d5d; --sky:#8ecae6; --sage:#dbe3cb; --muted:#55645c; }
+  :root { --ink:#14223a; --paper:#fbfaf4; --jungle:#0d1b38; --jungle2:#2f5486; --dusk:#f3b48c; --mango:#f0ac3a; --tomato:#d25b3f; --blue:#2f5486; --leaf:#3a9d5d; --sky:#8ecae6; --sage:#dbe4ef; --muted:#56637a; }
   * { box-sizing:border-box; margin:0; padding:0; }
   html,body { min-height:100%; }
-  body { font-family:"Nunito",system-ui,Arial,sans-serif; color:var(--ink); background:radial-gradient(ellipse 80% 70% at 50% 45%, var(--jungle2) 0%, var(--jungle) 75%); overflow-x:hidden; }
-  body::before { content:""; position:fixed; inset:0; background-image:radial-gradient(#ffffff10 1px, transparent 1.5px); background-size:22px 22px; pointer-events:none; }
+  body { font-family:"Nunito",system-ui,Arial,sans-serif; color:var(--ink); background:linear-gradient(180deg, var(--jungle) 0%, var(--jungle2) 52%, #8a9cc0 78%, var(--dusk) 100%) fixed; overflow-x:hidden; }
+  body::before { content:""; position:fixed; inset:0; background-image:radial-gradient(#ffffff55 1px, transparent 1.6px), radial-gradient(#ffffff30 1px, transparent 1.4px); background-size:97px 89px, 53px 61px; background-position:0 0, 21px 37px; -webkit-mask-image:linear-gradient(#000 0%, transparent 60%); mask-image:linear-gradient(#000 0%, transparent 60%); pointer-events:none; }
   h1,h2,h3,h4,.btn,.toast,.big,.qhead { font-family:"Baloo 2","Nunito",sans-serif; }
   a { color:inherit; }
 
@@ -169,9 +169,11 @@
     .welcome h2 { font-size:24px; }
   }
   @media (prefers-reduced-motion: reduce) { *, *::before { animation:none !important; transition:none !important; } }
+  .crown.test { background:var(--sky); }
 
   .three { position:fixed; inset:0; z-index:1; }
   .three canvas { display:block; cursor:grab; touch-action:none; }
+  .three::after { content:""; position:fixed; inset:0; pointer-events:none; z-index:2; background:radial-gradient(ellipse 75% 70% at 52% 48%, transparent 58%, rgba(40,28,40,.22) 100%); }
   .three canvas:active { cursor:grabbing; }
   .hud, .quests { z-index:20; }
   .hint3d { position:fixed; left:50%; bottom:18px; transform:translateX(-50%); z-index:15; color:#fbfaf4; font-size:14.5px; font-weight:700; background:rgba(16,38,31,.72); border:2px solid #fbfaf440; padding:7px 14px; border-radius:20px; pointer-events:none; transition:opacity .6s; white-space:nowrap; }
@@ -285,6 +287,7 @@
     <div class="ad win"><span class="crown">Winner</span><video class="vid" src="media/komal.mp4" poster="media/komal.jpg" controls playsinline preload="none"></video><h4>Komal – Night routine</h4><p class="hook">&ldquo;UPSC prep is a lot&rdquo;</p><div class="kv"><span>CTR</span><span>1.28%</span></div><div class="kv"><span>CPC</span><span>₹23.63</span></div></div>
     <div class="ad"><video class="vid" src="media/siddita.mp4" poster="media/siddita.jpg" controls playsinline preload="none"></video><h4>Siddita – Invisible struggle</h4><p class="hook">&ldquo;Toughest exam in India&rdquo;</p><div class="kv"><span>CTR</span><span>0.55%</span></div><div class="kv"><span>CPC</span><span>₹24.67</span></div></div>
     <div class="ad"><video class="vid" src="media/khushi.mp4" poster="media/khushi.jpg" controls playsinline preload="none"></video><h4>Khushi – No more timetables</h4><p class="hook">&ldquo;How many timetables did you follow?&rdquo;</p><div class="kv"><span>CTR</span><span>0.43%</span></div><div class="kv"><span>CPC</span><span>₹29.51</span></div></div>
+    <div class="ad"><span class="crown test">Testing now</span><video class="vid" src="media/ananshia.mp4" poster="media/ananshia.jpg" controls playsinline preload="none"></video><h4>Ananshia – Sheets Kit demo</h4><p class="hook">&ldquo;Basically, biryani money&rdquo;</p><div class="kv"><span>Angle</span><span>Demo + price</span></div><div class="kv"><span>Status</span><span>Live test</span></div></div>
     <div class="ad"><video class="vid" src="media/ritika.mp4" poster="media/ritika.jpg" controls playsinline preload="none"></video><h4>Ritika – Karol Bagh</h4><p class="hook">&ldquo;One subject you’ve been avoiding&rdquo;</p><div class="kv"><span>CTR</span><span>0.06%</span></div><div class="kv"><span>CPC</span><span>₹173.63</span></div></div>
   </div>
   <div class="callout"><b>Lesson:</b> a relatable daily-routine story beat a location-based angle by a wide margin. Knowing which ad to switch off matters as much as finding the winner.</div>
@@ -346,20 +349,26 @@
 <template id="t-me">
   <span class="chipxp">Hello!</span>
   <h2>That's me at my desk</h2>
-  <p>Kirubahar, from Nagercoil, Tamil Nadu. Aerospace engineer turned designer turned performance marketer. I like finding out why one ad works and another doesn't, then fixing what happens after the click.</p>
+  <p>Kirubahar, from Kanyakumari, Tamil Nadu. Aerospace engineer turned designer turned performance marketer. I like finding out why one ad works and another doesn't, then fixing what happens after the click.</p>
   <p>Open to remote roles across India or relocating to Bangalore.</p>
+</template>
+
+<template id="t-dog">
+  <span class="chipxp">Secret +5 XP</span>
+  <h2>Meet Scooby, the office dog</h2>
+  <p>Scooby is the fluffiest member of the team and head of morale. He reviews every ad creative from the rug, and he has never approved a campaign without a treat first. Achievement unlocked: <b>Good boy spotter</b>.</p>
 </template>
 
 <template id="t-cat">
   <span class="chipxp">Secret +5 XP</span>
-  <h2>You found Kaapi, the office cat</h2>
-  <p>Kaapi approves of A/B testing, mostly because it means more time sleeping on the beanbag. Achievement unlocked: <b>Curious explorer</b>.</p>
+  <h2>You found Mojito, the office cat</h2>
+  <p>Mojito approves of A/B testing, mostly because it means more time sleeping on the beanbag. Achievement unlocked: <b>Curious explorer</b>.</p>
 </template>
 
 <script>
-  const XP = { case:30, ads:25, stats:15, skills:20, contact:10, cat:5, me:0, gallery:10 };
+  const XP = { case:30, ads:25, stats:15, skills:20, contact:10, cat:5, dog:5, me:0, gallery:10 };
   const LABEL = { case:"Open the laptop", ads:"Check the ad wall", stats:"Inspect the trophy", skills:"Browse the bookshelf", contact:"Knock on the door" };
-  const NAMES = { case:"Case study unlocked", ads:"Ad wall unlocked", stats:"Results unlocked", skills:"Skills unlocked", contact:"Contact unlocked", cat:"Secret: Curious explorer", gallery:"Bonus: creative pinboard" };
+  const NAMES = { case:"Case study unlocked", ads:"Ad wall unlocked", stats:"Results unlocked", skills:"Skills unlocked", contact:"Contact unlocked", cat:"Secret: Curious explorer", gallery:"Bonus: creative pinboard", dog:"Secret: Good boy spotter" };
   const MAIN = ["case","ads","stats","skills","contact"];
   const seen = new Set();
   let xp = 0, leveled = false, current = null;
@@ -445,6 +454,7 @@
   });
   pbody.addEventListener("play", e => { pbody.querySelectorAll("video").forEach(v => { if (v !== e.target) v.pause(); }); }, true);
   $("#lightbox").addEventListener("click", () => $("#lightbox").classList.remove("show"));
+  if (location.hash.startsWith("#test")) $("#welcome").classList.remove("show");
   $("#start").addEventListener("click", () => { $("#welcome").classList.remove("show"); toast("Quest started · click anything that glows"); });
   $("#keep").addEventListener("click", () => $("#levelup").classList.remove("show"));
   $("#skip").addEventListener("click", e => { e.preventDefault(); open("contact"); });
